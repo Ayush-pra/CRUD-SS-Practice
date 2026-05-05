@@ -1,23 +1,13 @@
-FROM node:18
+FROM node:22
 
 WORKDIR /app
 
-# copy package files first (for caching)
 COPY package*.json ./
 
 RUN npm install
 
-# copy full project
 COPY . .
 
-# build frontend (for production)
-RUN npm run build
+EXPOSE 5173
 
-# install simple server to serve build
-RUN npm install -g serve
-
-# expose port
-EXPOSE 3000
-
-# run app
-CMD ["serve", "-s", "build", "-l", "3000"]
+CMD ["npm", "run", "dev", "--", "--host"]

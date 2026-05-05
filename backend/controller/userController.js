@@ -126,7 +126,7 @@ exports.addProfilePic = async (req, res) => {
     );
 
     // 2️⃣ Generate public URL
-    const profileUrl = `http://${process.env.MINIO_ENDPOINT}:${process.env.MINIO_PORT}/${bucket}/${fileName}`;
+    const profileUrl = `http://localhost:${process.env.MINIO_PORT}/${bucket}/${fileName}`;
 
     // 3️⃣ Save URL in PostgreSQL
     const result = await pool.query(

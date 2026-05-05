@@ -34,7 +34,7 @@ const initDb = async()=>{
 const startServer = async()=>{
     try{
         await initDb(); 
-        app.listen(process.env.PORT, () => {
+        app.listen(process.env.PORT,"0.0.0.0", () => {
             console.log(`Server running on port ${process.env.PORT}`);
         });
     }
