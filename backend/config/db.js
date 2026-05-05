@@ -13,8 +13,16 @@ const pool = new Pool({
   connectionTimeoutMillis: 2000
 });
 
-pool.connect()
-  .then(() => console.log("Connected to PostgreSQL ✅"))
-  .catch(err => console.error("Connection error ❌", err));
+const connectWithRetry = async () => {
+  try {
+    await pool.query("SELECT 1");
+    console.log("Connected to PostgreSQL ✅");
+  } catch (err) {
+    console.log("DB not ready, retrying in 3 seconds...");
+    setTimeout(connectWithRetry, 3000);
+  }
+};
+
+connectWithRetry();
 
 module.exports = pool;

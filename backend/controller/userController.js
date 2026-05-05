@@ -1,5 +1,5 @@
 const pool = require("../config/db");
-const minioClient = require("../config/minio");
+const {minioClient} = require("../config/minio");
 const { v4: uuidv4 } = require("uuid");
 
 exports.getProfile = async (req, res) => {

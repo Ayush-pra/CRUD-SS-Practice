@@ -6,6 +6,7 @@ const userModel = require("./config/userModel");
 const postModel = require("./config/postModel");
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const { initMinio } = require("./config/minio");
 const postRoutes = require("./routes/postRoutes");
 const app = express();
 app.use(
@@ -33,6 +34,7 @@ const initDb = async()=>{
 }
 const startServer = async()=>{
     try{
+        await initMinio();
         await initDb(); 
         app.listen(process.env.PORT,"0.0.0.0", () => {
             console.log(`Server running on port ${process.env.PORT}`);
